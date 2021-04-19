@@ -50,7 +50,7 @@ public class readLanguageData : MonoBehaviour
             {
                 // loanguage location marker
                 float[] thisXY = helpers.getXYPos(loadedData[i].latitude, loadedData[i].longitude, scaleX, scaleY);
-                GameObject thisDome = Instantiate(languageCentroidMarker, new Vector3(thisXY[0], 0.2f, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                GameObject thisDome = Instantiate(languageCentroidMarker, new Vector3(thisXY[0], 4, thisXY[1]), Quaternion.Euler(0, 0, 0));
 
                 // audio
                 if (loadedData[i].audiofile != null)
@@ -82,9 +82,9 @@ public class readLanguageData : MonoBehaviour
                 float theWidth = SELimits[0] - NWLimits[0]; // south - north
                 float theHeight = SELimits[1] - NWLimits[1]; // east - west
 
-                GameObject limitsCube = Instantiate(languageBoundsCube, new Vector3(thisXY[0], 0, thisXY[1]), Quaternion.Euler(0, 0, 0));
-                limitsCube.transform.localScale = new Vector3(theWidth, loadedData[i].numberofspeakers/1000+0.01f, theHeight);
-
+                GameObject limitsCube = Instantiate(languageBoundsCube, new Vector3(thisXY[0], 4, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                // limitsCube.transform.localScale = new Vector3(theWidth, loadedData[i].numberofspeakers/1000+0.01f, theHeight);
+                limitsCube.transform.localScale = new Vector3(theWidth, 0.1f, theHeight);
 
                 // language data
                 TextMesh thisTextMesh = thisDome.transform.GetChild(0).gameObject.GetComponent<TextMesh>();

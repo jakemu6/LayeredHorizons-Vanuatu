@@ -75,7 +75,7 @@ public class readGenericData : MonoBehaviour
 
                     // instantiate the marker game object
                     // it should be a parent object with a textmesh on a child object
-                    GameObject thisMarker = Instantiate(textMarker, new Vector3(thisXY[0], 0.05f, thisXY[1]), Quaternion.Euler(-90, 0, 0));
+                    GameObject thisMarker = Instantiate(textMarker, new Vector3(thisXY[0], 5, thisXY[1]), Quaternion.Euler(-90, 0, 0));
                     TextMesh nameText = thisMarker.GetComponentInChildren<TextMesh>();
                     nameText.text = (string)data[i]["dog"];
 
