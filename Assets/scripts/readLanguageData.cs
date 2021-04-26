@@ -18,6 +18,19 @@ public class readLanguageData : MonoBehaviour
     [Header("GO represents audio bounds in environment")]
     public GameObject ring;
 
+    // Layer position y value of where the layer is rendered
+    [Header("YPos of layer Language Marker")]
+    public int layerPosLangMarker;
+    // Layer position y value of where the layer is rendered
+    [Header("YPos of layer Language Cube")]
+    public int layerPosLangCube;
+    // Layer position y value of where the layer is rendered
+    [Header("YPos of layer Audio Icon")]
+    public int layerPosAudioIcon;
+    // Layer position y value of where the layer is rendered
+    [Header("YPos of layer Ring")]
+    public int layerPosRing;
+
     // holders for the map scale set in start method
     private int scaleX; 
     private int scaleY;
@@ -50,7 +63,7 @@ public class readLanguageData : MonoBehaviour
             {
                 // loanguage location marker
                 float[] thisXY = helpers.getXYPos(loadedData[i].latitude, loadedData[i].longitude, scaleX, scaleY);
-                GameObject thisDome = Instantiate(languageCentroidMarker, new Vector3(thisXY[0], 4, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                GameObject thisDome = Instantiate(languageCentroidMarker, new Vector3(thisXY[0], layerPosLangMarker, thisXY[1]), Quaternion.Euler(0, 0, 0));
 
                 // audio
                 if (loadedData[i].audiofile != null)
@@ -62,10 +75,10 @@ public class readLanguageData : MonoBehaviour
                     thesource.Play();
 
                     // audio icon
-                    GameObject thisAudioIcon = Instantiate(audioIcon, new Vector3(thisXY[0], 0.32f, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                    GameObject thisAudioIcon = Instantiate(audioIcon, new Vector3(thisXY[0], layerPosAudioIcon, thisXY[1]), Quaternion.Euler(0, 0, 0));
 
                     // ring visualisation
-                    GameObject ringObject = Instantiate(ring, new Vector3(thisXY[0], 0, thisXY[1]), Quaternion.Euler(-90, 0, 0));
+                    GameObject ringObject = Instantiate(ring, new Vector3(thisXY[0], layerPosRing, thisXY[1]), Quaternion.Euler(-90, 0, 0));
                     ringObject.transform.localScale = new Vector3(loadedData[i].numberofspeakers / 1000 + 0.01f, loadedData[i].numberofspeakers / 1000 + 0.01f, 0.5f);
                 }
                 else
@@ -82,7 +95,7 @@ public class readLanguageData : MonoBehaviour
                 float theWidth = SELimits[0] - NWLimits[0]; // south - north
                 float theHeight = SELimits[1] - NWLimits[1]; // east - west
 
-                GameObject limitsCube = Instantiate(languageBoundsCube, new Vector3(thisXY[0], 4, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                GameObject limitsCube = Instantiate(languageBoundsCube, new Vector3(thisXY[0], layerPosLangCube, thisXY[1]), Quaternion.Euler(0, 0, 0));
                 // limitsCube.transform.localScale = new Vector3(theWidth, loadedData[i].numberofspeakers/1000+0.01f, theHeight);
                 limitsCube.transform.localScale = new Vector3(theWidth, 0.1f, theHeight);
 

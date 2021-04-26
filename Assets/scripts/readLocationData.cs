@@ -17,7 +17,12 @@ public class readLocationData : MonoBehaviour
     public GameObject namedLocationMarker;
 
     // Layer position y value of where the layer is rendered
-    public int layerPos = 1;
+    [Header("YPos of Location Marker")]
+    public int layerPosLocationMarker;
+
+    // Layer position y value of where the layer is rendered
+    [Header("YPos of Capital City Marker")]
+    public int layerPosCapitalMarker;
 
     // public GameObject precipCube;
     // public TextMesh textOnCube;
@@ -88,7 +93,7 @@ public class readLocationData : MonoBehaviour
                     // PPL & PPLQ are displayed using the populatedPlaceMarker gameObject
                     if (loadedData[i].dsg != "PPLC" && loadedData[i].dsg != "PPLA" && !somethingInMySpot)
                     {
-                        GameObject thisCube = Instantiate(populatedPlaceMarker, new Vector3(thisXY[0], layerPos, thisXY[1]), Quaternion.Euler(90, 0, 0));
+                        GameObject thisCube = Instantiate(populatedPlaceMarker, new Vector3(thisXY[0], layerPosLocationMarker, thisXY[1]), Quaternion.Euler(0, 0, 0));
                         TextMesh nameText = thisCube.GetComponentInChildren<TextMesh>();
                         nameText.text = loadedData[i].fullnamero;
                         //lineIndex++;
@@ -102,7 +107,7 @@ public class readLocationData : MonoBehaviour
                         //GameObject thisCube = Instantiate(populatedPlaceMarker, new Vector3(thisXY[0], 0, thisXY[1]), Quaternion.Euler(90, 0, 0));
                         //Material cubeMaterial = thisCube.GetComponent<Renderer>().material;
                         //cubeMaterial.color = new Color(1, 0, 0.8666f);
-                        GameObject thisMarker = Instantiate(namedLocationMarker, new Vector3(thisXY[0], layerPos, thisXY[1]), Quaternion.Euler(-90, 0, 0));
+                        GameObject thisMarker = Instantiate(namedLocationMarker, new Vector3(thisXY[0], layerPosCapitalMarker, thisXY[1]), Quaternion.Euler(0, 0, 0));
                         print(loadedData[i].fullnamero);
                         TextMesh nameText = thisMarker.GetComponentInChildren<TextMesh>();
                         nameText.text = loadedData[i].fullnamero;
