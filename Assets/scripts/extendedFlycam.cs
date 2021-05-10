@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.VR;
+using UnityEngine.XR;
 
 public class extendedFlycam : MonoBehaviour
 {
@@ -57,9 +57,10 @@ public class extendedFlycam : MonoBehaviour
             //print(terrainHeightWhereWeAre + "  " + transform.position);
         }
         */
-        if (!UnityEngine.XR.XRDevice.isPresent)
-        {
-            transform.position += transform.forward * normalMoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
+        //if (!unityEngine.xr.xrdevice.ispresent) 
+        if (!ExampleUtil.isPresent())
+            {
+                transform.position += transform.forward * normalMoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
 
             // stay above code
             /*
