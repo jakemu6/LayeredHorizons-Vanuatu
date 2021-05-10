@@ -10,19 +10,37 @@ public class readLocationData : MonoBehaviour
     // file name of location json data - must be in streaming assets folder
     public string filename = "locationData.json";
 
-    [Header("GO to represent single location on the map")]
-    public GameObject populatedPlaceMarker;
+    // array to read json location data into
+    private locationData[] mylocationData;
 
-    [Header("GO to represent capital city")]
-    public GameObject namedLocationMarker;
 
-    // Layer position y value of where the layer is rendered
-    [Header("YPos of Location Marker")]
-    public int layerPosLocationMarker;
 
-    // Layer position y value of where the layer is rendered
-    [Header("YPos of Capital City Marker")]
-    public int layerPosCapitalMarker;
+    [Header("GO to represent PPLC(capital city)")]
+    public GameObject PPLC;
+
+    [Header("YPos of PPLC")]
+    public int YPosPPLC;
+
+    [Header("GO to represent PPLA(major city)")]
+    public GameObject PPLA;
+
+    [Header("YPos of PPLA")]
+    public int YPosPPLA;
+
+    [Header("GO to represent PPL(named locations)")]
+    public GameObject PPL;
+
+    [Header("YPos of PPL")]
+    public int YPosPPL;
+
+    [Header("GO to represent PPLQ(abandoned location)")]
+    public GameObject PPLQ;
+
+    [Header("YPos of PPLQ")]
+    public int YPosPPLQ;
+
+    [Header("GO to represent Missing DSG Code(check data for missing DSG value")]
+    public GameObject MissingDSGCode;
 
     // public GameObject precipCube;
     // public TextMesh textOnCube;
@@ -32,8 +50,7 @@ public class readLocationData : MonoBehaviour
     private int scaleX; 
     private int scaleY; 
 
-    // array to read json location data into
-    private locationData[] mylocationData;
+
 
     // Use this for initialization
     void Start()
@@ -88,32 +105,53 @@ public class readLocationData : MonoBehaviour
                     // PPL: populated place
                     // PPLQ: populated place abandoned
                     // PPLC: capital
-                    // PPLA: first oder administrative division
+                    // PPLA: first oder administrative division (major cities and the like)
 
-                    // PPL & PPLQ are displayed using the populatedPlaceMarker gameObject
-                    if (loadedData[i].dsg != "PPLC" && loadedData[i].dsg != "PPLA" && !somethingInMySpot)
+                    if (loadedData[i].dsg == "PPLC")
                     {
-                        GameObject thisCube = Instantiate(populatedPlaceMarker, new Vector3(thisXY[0], layerPosLocationMarker, thisXY[1]), Quaternion.Euler(0, 0, 0));
-                        TextMesh nameText = thisCube.GetComponentInChildren<TextMesh>();
-                        nameText.text = loadedData[i].fullnamero;
-                        //lineIndex++;
+                        GameObject PPLCMarker = Instantiate(PPLC, new Vector3(thisXY[0], YPosPPLC, thisXY[1]), Quaternion.Euler(0, 0, 0));
                     }
-                    // PPLC & PPLA are displayed namedLocationMarker above a populatedPlaceMarker whose color is changed to pink
-                    // todo: This pink color needs changing as it is confusing to users between these markers and the language location markers
-                    // which are currently the same color
-                    else if (loadedData[i].dsg == "PPLC" || loadedData[i].dsg == "PPLA")
+                    else if (loadedData[i].dsg == "PPLA")
                     {
-                        // I don't think we want a cube here, just the populated place marker
-                        //GameObject thisCube = Instantiate(populatedPlaceMarker, new Vector3(thisXY[0], 0, thisXY[1]), Quaternion.Euler(90, 0, 0));
-                        //Material cubeMaterial = thisCube.GetComponent<Renderer>().material;
-                        //cubeMaterial.color = new Color(1, 0, 0.8666f);
-                        GameObject thisMarker = Instantiate(namedLocationMarker, new Vector3(thisXY[0], layerPosCapitalMarker, thisXY[1]), Quaternion.Euler(0, 0, 0));
-                        //print(loadedData[i].fullnamero);
-                        TextMesh nameText = thisMarker.GetComponentInChildren<TextMesh>();
-                        nameText.text = loadedData[i].fullnamero;
-                        thisMarker.transform.name = loadedData[i].fullnamero;
-                        //lineIndex++;
+                        GameObject PPLAMarker = Instantiate(PPLA, new Vector3(thisXY[0], YPosPPLA, thisXY[1]), Quaternion.Euler(0, 0, 0));
                     }
+                    else if (loadedData[i].dsg == "PPL")
+                    {
+                        GameObject PPLMarker = Instantiate(PPL, new Vector3(thisXY[0], YPosPPL, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                    }
+                    else if (loadedData[i].dsg == "PPLQ")
+                    {
+                        GameObject PPLQMarker = Instantiate(PPLQ, new Vector3(thisXY[0], YPosPPLQ, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                    }
+                    else
+                    {
+                        GameObject MissingDSGCodeMarker = Instantiate(MissingDSGCode, new Vector3(thisXY[0], 0, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                    }
+
+                    //// PPL & PPLQ are displayed using the populatedPlaceMarker gameObject
+                    //if (loadedData[i].dsg != "PPLC" && loadedData[i].dsg != "PPLA" && !somethingInMySpot)
+                    //{
+                    //    GameObject thisCube = Instantiate(PPLC, new Vector3(thisXY[0], YPosPPLC, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                    //    TextMesh nameText = thisCube.GetComponentInChildren<TextMesh>();
+                    //    nameText.text = loadedData[i].fullnamero;
+                    //    //lineIndex++;
+                    //}
+                    //// PPLC & PPLA are displayed namedLocationMarker above a populatedPlaceMarker whose color is changed to pink
+                    //// todo: This pink color needs changing as it is confusing to users between these markers and the language location markers
+                    //// which are currently the same color
+                    //else if (loadedData[i].dsg == "PPLC" || loadedData[i].dsg == "PPLA")
+                    //{
+                    //    // I don't think we want a cube here, just the populated place marker
+                    //    //GameObject thisCube = Instantiate(populatedPlaceMarker, new Vector3(thisXY[0], 0, thisXY[1]), Quaternion.Euler(90, 0, 0));
+                    //    //Material cubeMaterial = thisCube.GetComponent<Renderer>().material;
+                    //    //cubeMaterial.color = new Color(1, 0, 0.8666f);
+                    //    GameObject thisMarker = Instantiate(PPL, new Vector3(thisXY[0], YPosPPL, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                    //    //print(loadedData[i].fullnamero);
+                    //    TextMesh nameText = thisMarker.GetComponentInChildren<TextMesh>();
+                    //    nameText.text = loadedData[i].fullnamero;
+                    //    thisMarker.transform.name = loadedData[i].fullnamero;
+                    //    //lineIndex++;
+                    //}
                 }
             }
 

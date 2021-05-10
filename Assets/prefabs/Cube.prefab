@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd57c4c99358ef47ae35544b6f85f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlapGO: {fileID: 6319463493888502618, guid: 03b023b701ef0e84e8ea2376c8b772b6,
+  overlapGO: {fileID: 6563107190071486607, guid: 71c704dae564a7948a7dfc63fe84c8b6,
     type: 3}
   myColor: {r: 1, g: 0, b: 0.8455281, a: 0}
   myRenderer: {fileID: 8341296038354534408}
