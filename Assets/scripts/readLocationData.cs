@@ -60,6 +60,9 @@ public class readLocationData : MonoBehaviour
         scaleX = (int)commonData.mapScale.x;
         scaleY = (int)commonData.mapScale.y;
 
+        //Invoke("loadData", 2.0f);
+        //print("called!");
+
         loadData();
     }
 
@@ -118,6 +121,10 @@ public class readLocationData : MonoBehaviour
                     else if (loadedData[i].dsg == "PPL")
                     {
                         GameObject PPLMarker = Instantiate(PPL, new Vector3(thisXY[0], YPosPPL, thisXY[1]), Quaternion.Euler(0, 0, 0));
+                        //send the lattitude and longitude to the getImage so that you can get map data from the API's.
+                        //needs to access the cvhild of the gameobject because that's where I put the script
+                        PPLMarker.GetComponentInChildren<getImageMaterial>().SetValues(loadedData[i].lat, loadedData[i].lon);
+
                     }
                     else if (loadedData[i].dsg == "PPLQ")
                     {
